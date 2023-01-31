@@ -63,5 +63,22 @@ def load_music_data(sp, batch, retry_num=10):
     return load_music_data(sp, batch, retry_num)
 
 
+def load_track_data(sp, batch, retry_num=10):
+    if retry_num < 0:
+        raise Exception('Error')
+
+    retry_num -= 1
+    try:
+        results = sp.tracks(tracks=batch)
+        return results
+    except Exception as e:
+        print(e)
+        sp = refresh_spotify()
+        time.sleep(10)
+
+    return load_track_data(sp, batch, retry_num)
+
+
+
 
     

@@ -105,21 +105,21 @@ print(artists)
 # print(type(artists.genres[298854]), not artists.genres[298854])
 # print(artists.genres)
 
-# artists_all_genre = all_genres(artists)
-# save_path = '/home/mila/r/rebecca.salganik/scratch/MusicSAGE_Data/OG_CSV/artist_features_all_genres.pkl'
-# pickle.dump(artists_all_genre, open(save_path, 'wb'))
+artists_all_genre = all_genres(artists)
+save_path = '/home/mila/r/rebecca.salganik/scratch/MusicSAGE_Data/OG_CSV/artist_features_all_genres.pkl'
+pickle.dump(artists_all_genre, open(save_path, 'wb'))
 
-artists_top_genre = filter_top_k(artists, 20)
-save_path = '/home/mila/r/rebecca.salganik/scratch/MusicSAGE_Data/OG_CSV/artist_features_top_20_genres.pkl'
-pickle.dump(artists_top_genre, open(save_path, 'wb'))
+# artists_top_genre = filter_top_k(artists, 20)
+# save_path = '/home/mila/r/rebecca.salganik/scratch/MusicSAGE_Data/OG_CSV/artist_features_top_20_genres.pkl'
+# pickle.dump(artists_top_genre, open(save_path, 'wb'))
 
 def launch(output_path, input_path, encoding, k):
     if encoding == 'all_genres': 
         artists = pd.read_csv('/home/mila/r/rebecca.salganik/scratch/MusicSAGE_Data/OG_CSV/spotify_in_csv/artist_features.csv', sep='\t')
         artists['genres'] = artists.apply(lambda row: string_list(row['genres']), axis=1)
         artists = all_genres(artists)
-        # with open (input_path, "rb") as f: 
-        #     artists = pickle.load(f)
+        with open ('/home/mila/r/rebecca.salganik/scratch/MusicSAGE_Data/OG_CSV/artist_features_all_genres.pkl', "wb") as f: 
+            artists = pickle.load(f)
     if encoding == 'topk': 
         artists = pd.read_csv(input_path, sep='\t')
         artists['genres'] = artists.apply(lambda row: string_list(row['genres']), axis=1)
