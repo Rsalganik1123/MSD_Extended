@@ -14,7 +14,7 @@ def scrape_music_feature_data(track_uri, save_path):
     :return: metadata of scraped data, missing uris
     """
     all_data = []
-    batches = list(chunks(track_uri, 50))
+    batches = list(chunks(track_uri, 100))
     missed_tracks = []
     sp = refresh_spotify()
     for batch in tqdm(batches):
